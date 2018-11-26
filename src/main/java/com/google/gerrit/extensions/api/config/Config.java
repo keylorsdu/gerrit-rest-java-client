@@ -15,19 +15,32 @@
 package com.google.gerrit.extensions.api.config;
 
 import com.google.gerrit.extensions.restapi.NotImplementedException;
+import com.google.gerrit.extensions.restapi.RestApiException;
 
 public interface Config {
-  /** @return An API for getting server related configurations. */
-  Server server();
+    /** @return An API for getting server related configurations. */
+    Server server();
 
-  /**
-   * A default implementation which allows source compatibility when adding new methods to the
-   * interface.
-   */
-  class NotImplemented implements Config {
-    @Override
-    public Server server() {
-      throw new NotImplementedException();
+    /**
+     * flush all cache in server
+     * 
+     * @throws RestApiException
+     **/
+    void flushCache() throws RestApiException;
+
+    /**
+     * A default implementation which allows source compatibility when adding new methods to the interface.
+     */
+    class NotImplemented implements Config {
+        @Override
+        public Server server() {
+            throw new NotImplementedException();
+        }
+
+        @Override
+        public void flushCache() throws RestApiException {
+            // TODO Auto-generated method stub
+
+        }
     }
-  }
 }
